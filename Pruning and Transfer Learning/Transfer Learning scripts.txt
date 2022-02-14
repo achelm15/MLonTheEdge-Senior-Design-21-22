@@ -15,3 +15,15 @@ Add this code to try prune recipe
 !python train.py --img 416 --batch 150 --epochs 20 --cfg yolov5s.yaml --weights PATH_TO_best.pt --data data.yaml --hyp ./data/hyps/hyp.scratch.yaml --recipe /sparseml/integrations/ultralytics-yolov5/recipes/yolov5.transfer_learn_pruned_quantized.md
                                                                                                                                                             # different recipes can be choosen 
 
+Second Try:
+
+-Train your model from scratch
+!python ./train.py --img 416 --batch 150 --epochs 20 --data ./data.yaml --weights yolov5s.pt
+
+-Retrain the model with your best weight file
+!python ./train.py --img 416 --batch 150 --epochs 20 --data ./data.yaml --weights ./runs/train/exp/weights/best.pt
+
+-Freeze the backbone ( first 10 layers in YOLOv5s ) and retrain the model
+!python ./train.py --freeze 10 --img 416 --batch 150 --epochs 20 --data ./data.yaml --weights ./runs/train/exp3/weights/best.pt
+
+mAP increased from 0.654 to 0.787 mAP 
