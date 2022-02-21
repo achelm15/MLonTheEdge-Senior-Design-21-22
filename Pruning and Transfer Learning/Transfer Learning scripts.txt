@@ -3,3 +3,5 @@ Best try Yet:
 !python /content/yolov5/train.py --freeze 0 1 2 3 4 5 22 23 --img 416 --batch 150 --epochs 20 --data /content/yolov5/data.yaml --weights yolov5s.pt
 
 freeze first 6 layers from the backbone and the layers 22 and 23 and leave the last detect layer.
+
+mAP = 0.667
