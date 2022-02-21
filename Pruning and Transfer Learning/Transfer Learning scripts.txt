@@ -1,29 +1,5 @@
-First Try:
+Best try Yet:
 
-clone to this github
+!python /content/yolov5/train.py --freeze 0 1 2 3 4 5 22 23 --img 416 --batch 150 --epochs 20 --data /content/yolov5/data.yaml --weights yolov5s.pt
 
-!git clone https://github.com/neuralmagic/sparseml
-%cd sparseml
-
-Add this line to train.py in YOLOv5 ( in line 487 as of 2/8/22) or in def parse_opt(known=False): method
-
-parser.add_argument('--recipe', type=str, default=None, help='Path to a sparsification recipe, '
-                                                                 'see https://github.com/neuralmagic/sparseml for more information')
-
-
-Add this code to try prune recipe
-!python train.py --img 416 --batch 150 --epochs 20 --cfg yolov5s.yaml --weights PATH_TO_best.pt --data data.yaml --hyp ./data/hyps/hyp.scratch.yaml --recipe /sparseml/integrations/ultralytics-yolov5/recipes/yolov5.transfer_learn_pruned_quantized.md
-                                                                                                                                                            # different recipes can be choosen 
-
-Second Try:
-
--Train your model
-!python ./train.py --img 416 --batch 150 --epochs 20 --data ./data.yaml --weights yolov5s.pt
-
--Retrain the model with your best weight
-!python ./train.py --img 416 --batch 150 --epochs 20 --data ./data.yaml --weights ./runs/train/exp/weights/best.pt
-
--Freeze the backbone ( first 10 layers in YOLOv5s ) and retrain the model
-!python ./train.py --freeze 10 --img 416 --batch 150 --epochs 20 --data ./data.yaml --weights ./runs/train/exp3/weights/best.pt
-
-mAP increased from 0.654 to 0.83 mAP 
+freeze first 6 layers from the backbone and the layers 22 and 23 and leave the last detect layer.
